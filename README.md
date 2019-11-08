@@ -1,6 +1,6 @@
 # Maki Development 
 
-Discovering the Neural Mechanisms of Dyadic Social Interaction
+**Discovering the Neural Mechanisms of Dyadic Social Interaction**
 
 ---------
 **Rebecca Ramnauth** </br>
