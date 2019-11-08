@@ -1,0 +1,30 @@
+# TODO Complete this!
+
+* General 
+  Maki is controlled by an [[https://learn.trossenrobotics.com/arbotix/7-arbotix-quick-start-guide][ArbotiX-M]] microcontroller. The maki_controller subdir contains the driver source code and other relevant files, but any changes must be uploaded via Arduino's IDE.  
+* Prereqs
+  You may need to add your user to the dialout group to send commands to Maki:
+  
+#+BEGIN_SRC shell
+  sudo gpasswd --add ${USER} dialout
+#+END_SRC
+ 
+* Test behaviors
+   Make sure to osurce setup.bash in terminal first.
+
+ #+BEGIN_SRC shell
+   source ~/catkin_ws/deve/setup.bash
+ #+END_SRC
+
+  To test some basic Maki behaviors (blinking and head nod) first launch a roscore instance:
+ #+BEGIN_SRC shell
+   roscore
+ #+END_SRC
+ 
+And then in a separate terminal run: 
+ #+BEGIN_SRC shell
+   roslaunch maki_robot test_behaviors.launch
+ #+END_SRC
+ 
+
+

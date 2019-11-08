@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<robot name="maki">
+
+<material name="blue">
+	<color rgba="0 0 .8 1"/>
+</material> 
+<material name="black">
+	<color rgba="0 0 0 1"/>
+</material>
+<material name="white">
+	<color rgba="1 1 1 1"/>
+</material>
+
+
+<link name="base_link">
+	<visual>
+		<geometry>
+			<cylinder length="1" radius="0.5"/>
+		</geometry>
+		<origin rpy="0 0 0" xyz="0 0 0.5"/>
+		<material name="white"/>
+	</visual>
+</link>
+
+<link name="head">
+	<visual>
+		<geometry>
+			<sphere radius="0.6"/>
+		</geometry>
+		<material name="white"/>
+	</visual>
+</link>
+<link name="virtual_head"></link>
+<joint name="head_tilt" type="revolute">
+	<parent link="virtual_head"/>
+	<limit effort="1000.0" lower="-0.358" upper="0.394" velocity="0.5"/>
+	<child link="head"/>
+	<origin xyz="0 0 1.6"/>
+	<axis xyz="0 1 0"/>
+</joint>
+<joint name="head_swivel" type="revolute">
+	<limit effort="1000.0" lower="-1.309" upper="1.308" velocity="0.5"/>	
+	<parent link="base_link"/>
+	<child link="virtual_head"/>
+	<origin xyz="0 0 0"/>
+	<axis xyz="0 0 1"/>
+</joint>
+
+
+
+<link name="eye1">
+	<visual>
+		<origin rpy="0 0 0" xyz="0 0 0"/>
+		<geometry>
+			<sphere radius="0.15"/>
+		</geometry>
+		<material name="black"/>
+	</visual>	
+</link>
+<link name="virtual_eye"></link>
+<joint name="eye1_swivel" type="revolute">
+	<parent link="head"/>
+	<child link="virtual_eye"/>
+	<limit effort="1000.0" lower="-0.337" upper="0.266" velocity="0.5"/>
+	<origin xyz="0.4 -0.25 0.25"/>
+	<axis xyz="0 0 1"/>
+</joint>
+<joint name="eye1_tilt" type="revolute">
+	<parent link="virtual_eye"/>
+	<child link="eye1"/>	
+	<limit effort="1000.0" lower="-0.501" upper="0.445" velocity="0.5"/>
+	<axis xyz="0 1 0"/>
+</joint>
+
+<link name="eye2">
+	<visual>
+		<origin rpy="0 0 1" xyz="0 0 0"/>
+		<geometry>
+			<sphere radius="0.15"/>
+		</geometry>
+		<material name="black"/>
+	</visual>
+</link>
+<link name="virtual_eye2"></link>
+
+<link name="eyelid1">
+	<visual>
+		<origin rpy="0 0 1.57" xyz="0 0 0.15"/>
+		<geometry>
+			<box size="0.3 0.05 0.05"/>
+		</geometry>
+		<material name="white"/>
+	</visual>
+</link>
+<joint name="eyelid1_joint" type="revolute">
+	<origin xyz="0.4 -0.25 0.25"/>
+	<axis xyz="0 1 0"/>	
+	<parent link="head"/>
+	<child link="eyelid1"/>	
+	<limit effort="1000.0" lower="-0.179" upper="0.712" velocity="0.5"/>
+</joint>
+<link name="eyelid2">
+	<visual>
+		<origin rpy="0 0 1.57" xyz="0 0 0.15"/>
+		<geometry>
+			<box size="0.3 0.05 0.05"/>
+		</geometry>
+		<material name="white"/>
+	</visual>
+</link>
+<joint name="eyelid2_joint" type="continuous">
+	<parent link="head"/>
+	<child link="eyelid2"/>		
+	<origin xyz="0.4 0.25 0.25"/>
+	<axis xyz="0 1 0"/>	
+	<mimic joint="eyelid1_joint"/>
+</joint>
+
+<joint name="eye2_tilt" type="continuous">
+	<parent link="virtual_eye2"/>
+	<child link="eye2"/>	
+	<axis xyz="0 1 0"/>
+	<mimic joint="eye1_tilt"/>		
+</joint>
+<joint name="eye2_swivel" type="continuous">
+	<parent link="head"/>
+	<child link="virtual_eye2"/>	
+	<origin xyz="0.4 0.25 0.25"/>
+	<axis xyz="0 0 1"/>
+	<mimic joint="eye1_swivel"/>		
+</joint>
+
+<link name="iris1">
+	<visual>
+		<origin rpy="0 0 1" xyz="0 0 0"/>
+		<geometry>
+			<sphere radius="0.05"/>
+		</geometry>
+		<material name="blue"/>
+	</visual>
+</link>
+<joint name="iris1_joint" type="fixed">
+	<origin xyz="0.12 0 0"/>	
+	<parent link="eye1"/>
+	<child link="iris1"/>
+	
+</joint>
+
+<link name="iris2">
+	<visual>
+		<origin rpy="0 0 1" xyz="0 0 0"/>
+		<geometry>
+			<sphere radius="0.05"/>
+		</geometry>
+		<material name="blue"/>
+	</visual>
+</link>
+<joint name="iris2_joint" type="fixed">
+	<origin xyz="0.12 0 0"/>	
+	<parent link="eye2"/>
+	<child link="iris2"/>
+	
+</joint>
+
+</robot>
