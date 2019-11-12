@@ -18,6 +18,7 @@
   <node name="blinking" pkg="maki_robot" type="blinking.py" output="screen" />
   <node name="nodding" pkg="maki_robot" type="head_nod.py" output="screen" />
   <node name="shaking" pkg="maki_robot" type="head_shake.py" output="screen" />
+  <node name="looking" pkg="maki_robot" type="look_alissa.py" output="screen" />
 </group>
 
 <!-- robot interface -->
