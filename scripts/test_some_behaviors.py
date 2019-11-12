@@ -28,10 +28,16 @@ if __name__ == '__main__':
     rospy.init_node("test_behaviors")
     rospy.loginfo("Sending test commands")
     pub = rospy.Publisher("/maki_macro", String, queue_size=10)
-
+    '''
+    default = [ # default behaviors
+        "reset selectiveAttention",
+        "visualScan start"
+    ]
+    '''
     default = [ # default behaviors
         "reset eyelids",
-        "spontaneousBlink start"
+        "reset selectiveAttention",
+        "spontaneousBlink start" #"asleep"
     ]
 
     for msg in default: 
@@ -43,24 +49,30 @@ if __name__ == '__main__':
         n = raw_input("\n Input message:")
         if (n == "think"): # 'deep thought' behavior
             msgs = [
-                "lookAtAlissa" 
+                "lookAtAlissa",
+                #"reset selectiveAttention",
+                "visualScan start" 
             ]
         elif (n == "wonder"): # 'wondering' behavior
             msgs = [
-                "lookAwayFromAlissa"
+                "lookAwayFromAlissa",
+                "visualScan start"
             ]
         elif (n == "neutral"): # return to neutral position
             msgs = [
-                "lookNeutral"
+                "lookNeutral",
+                "visualScan stop"
             ]
         elif (n == "shake"): # 'no' behavior
             msgs = [
                 "reset eyelids",
+                "visualScan stop",
                 "shake"
             ]
         elif (n == "nod"): # 'yes' behavior
             msgs = [
                 "reset eyelids",
+                "visualScan stop",
                 "nod"
             ]
 

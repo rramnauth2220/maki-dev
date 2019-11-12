@@ -19,6 +19,8 @@
   <node name="nodding" pkg="maki_robot" type="head_nod.py" output="screen" />
   <node name="shaking" pkg="maki_robot" type="head_shake.py" output="screen" />
   <node name="looking" pkg="maki_robot" type="look_alissa.py" output="screen" />
+   <node name="attending" pkg="maki_robot" type="selective_attention.py" output="screen" />
+   <node name="awaking" pkg="maki_robot" type="asleep_awake.py" output="screen" />
 </group>
 
 <!-- robot interface -->
