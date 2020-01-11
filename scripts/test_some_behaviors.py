@@ -66,13 +66,28 @@ if __name__ == '__main__':
                 "visualScan stop"
             ]
             current_action = "neutral"
-        elif (n == "shake"): # 'no' behavior
+
+        elif (n == "shake full"): # 'no' behavior
             msgs = [
                 "reset eyelids",
                 "visualScan stop",
-                "shake"
+                "shake full"
             ]
-            current_action = "shake"
+            current_action = "shake full"
+        elif (n == "shake right"): # 'no' behavior
+            msgs = [
+                "reset eyelids",
+                "visualScan stop",
+                "shake right"
+            ]
+            current_action = "shake right"
+        elif (n == "shake left"): # 'no' behavior
+            msgs = [
+                "reset eyelids",
+                "visualScan stop",
+                "shake left"
+            ]
+            current_action = "shake left"
         elif (n == "nod up"): # 'yes' behavior
             msgs = [
                 "reset eyelids",

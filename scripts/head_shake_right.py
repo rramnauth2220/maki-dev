@@ -44,9 +44,10 @@ class headShake( headTiltBaseBehavior ):
 		self.DC_helper = dynamixelConversions()
 
 		## different versions of head nodding
-		headShake.v1 = True
-		headShake.v2 = False
-		headShake.v3 = False
+		headShake.v1 = False
+		headShake.v2 = False ## RIGHT --> LEFTMID --> MID
+		headShake.v3 = True ## RIGHT --> MID
+		headShake.v4 = False ## ??LEFT --> MID
 
 		self.repetition = 1
 
@@ -165,6 +166,8 @@ class headShake( headTiltBaseBehavior ):
 
 				## VERSION 1: FROM UP --> MIDDLE --> DOWN --> 
 				if headShake.v1:
+					baseBehavior.monitorMoveToGP( self, str(self.shake_front_left), hp_gp=HP_LEFT, delta_pp=3.5*DELTA_PP )
+
 					baseBehavior.pubTo_maki_command( self, str(self.shake_left_front), time_ms=self.ipt_shake_front_left, time_inc=0.001 )
 	
 					baseBehavior.pubTo_maki_command( self, str(self.shake_front_right), time_ms=self.ipt_shake_front_right, time_inc=0.001 )
@@ -175,7 +178,8 @@ class headShake( headTiltBaseBehavior ):
 
 				## VERSION 2: UP --> DOWN --> 
 				if headShake.v2:
-					#baseBehavior.pubTo_maki_command( self, str(self.shake_right_left), time_ms=IPT_FACE )
+					baseBehavior.monitorMoveToGP( self, str(self.shake_front_left), hp_gp=HP_LEFT, delta_pp=3.5*DELTA_PP )
+
 					baseBehavior.pubTo_maki_command( self, str(self.shake_right_left), time_ms=self.ipt_shake_front_left )
 
 					baseBehavior.pubTo_maki_command( self, str(self.shake_left_right), time_ms=IPT_FACE )
@@ -183,13 +187,19 @@ class headShake( headTiltBaseBehavior ):
 
 				## VERSION 3: FROM UP --> DOWN --> 
 				if headShake.v3:
-					#baseBehavior.pubTo_maki_command( self, str(self.shake_left_right), time_ms=IPT_FACE )
+					baseBehavior.monitorMoveToGP( self, str(self.shake_front_left), hp_gp=HP_LEFT, delta_pp=3.5*DELTA_PP )
+
 					baseBehavior.monitorMoveToGP( self, str(self.shake_left_right), ht_gp=HP_RIGHT, delta_pp=3.5*DELTA_PP )
 
 				## ALL: DOWN --> UP -->
 				if (headShake.v1 or headShake.v2 or headShake.v3) and (_loop_count < self.repetition):
 					#baseBehavior.pubTo_maki_command( self, str(self.shake_right_left), time_ms=IPT_FACE )
 					baseBehavior.monitorMoveToGP( self, str(self.shake_right_left), ht_gp=HP_LEFT, delta_pp=3.5*DELTA_PP )
+
+				## VERSION 3: FROM UP --> DOWN --> 
+				if headShake.v4:
+										
+					baseBehavior.monitorMoveToGP( self, str(self.shake_left_right), ht_gp=HP_RIGHT, delta_pp=3.5*DELTA_PP )
 
 			#end	while not self.mTT_INTERRUPT:
 
@@ -209,7 +219,7 @@ class headShake( headTiltBaseBehavior ):
 	def parse_maki_macro( self, msg ):
 		print msg.data
 
-		if msg.data == "shake":
+		if msg.data == "shake right":
 			### try to nicely startup headshake testing without jerking MAKI's head tilt servo
 			headTiltBaseBehavior.start(self)
 			self.macroHeadShake()
