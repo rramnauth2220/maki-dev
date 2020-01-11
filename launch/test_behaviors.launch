@@ -16,9 +16,14 @@
 <!-- behaviors -->
 <group if="$(arg agentic_behaviors)" >
   <node name="blinking" pkg="maki_robot" type="blinking.py" output="log" />
-  <node name="nodding" pkg="maki_robot" type="head_nod.py" output="log" />
+
+  <node name="nodding_up" pkg="maki_robot" type="head_nod_up.py" output="log" />
+  <node name="nodding_down" pkg="maki_robot" type="head_nod_down.py" output="log" />
+  <node name="nodding_full" pkg="maki_robot" type="head_nod_full.py" output="log" />
+
   <node name="shaking" pkg="maki_robot" type="head_shake.py" output="log" />
   <node name="looking" pkg="maki_robot" type="look_alissa.py" output="log" />
+
    <node name="attending" pkg="maki_robot" type="selective_attention.py" output="log" />
    <node name="awaking" pkg="maki_robot" type="asleep_awake.py" output="log" />
 </group>

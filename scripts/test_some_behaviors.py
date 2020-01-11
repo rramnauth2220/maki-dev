@@ -73,14 +73,41 @@ if __name__ == '__main__':
                 "shake"
             ]
             current_action = "shake"
-        elif (n == "nod"): # 'yes' behavior
+        elif (n == "nod up"): # 'yes' behavior
             msgs = [
                 "reset eyelids",
                 "visualScan stop",
-                "nod"
+                "nod up"
             ]
-            current_action = "nod"
-
+            current_action = "nod up"
+        elif (n == "nod down"): # 'yes' behavior
+            msgs = [
+                "reset eyelids",
+                "visualScan stop",
+                "nod down"
+            ]
+            current_action = "nod down"
+        elif (n == "nod full"): # 'yes' behavior
+            msgs = [
+                "reset eyelids",
+                "visualScan stop",
+                "nod full"
+            ]
+            current_action = "nod full"
+        elif (n == "nothing"): # 'quiet' behavior
+            msgs = [
+                "reset eyelids",
+                "visualScan stop",
+                "spontaneousBlink stop"
+            ]
+            current_action = "nothing" 
+        elif (n == "default"): # 'alive' behavior
+            msgs = [ # default behaviors
+                "reset eyelids",
+                "reset selectiveAttention",
+                "spontaneousBlink start" #"asleep"
+            ]
+            current_action = "default" 
 
         rospy.loginfo("[CMD-SENT] " + current_action)
         start_time = time.time()

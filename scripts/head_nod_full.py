@@ -209,7 +209,7 @@ class headNod( headTiltBaseBehavior ):
 	def parse_maki_macro( self, msg ):
 		print msg.data
 
-		if msg.data == "nod":
+		if msg.data == "nod full":
 			### try to nicely startup headnod testing without jerking MAKI's head tilt servo
 			headTiltBaseBehavior.start(self)
 			self.macroHeadNod()
