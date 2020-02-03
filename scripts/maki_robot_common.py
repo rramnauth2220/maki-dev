@@ -101,7 +101,6 @@ if get_param("is_maki_2"):
 
     #HP_ALISSA = 620	## to maki's right
     HT_ALISSA = 510
-
     HT_EXPERIMENTER = 555 #560	#565	#570
 
     HP_LEFT_SCREEN = 575
